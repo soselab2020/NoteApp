@@ -24,14 +24,7 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: 給 mvnw 執行權限
-        run: chmod +x ./mvnw
-
       - name: 編譯與測試
         run: ./mvnw -B clean test package
 
-      - name: 上傳 JAR 成品
-        uses: actions/upload-artifact@v4
-        with:
-          name: app-jar
           path: target/*.jar
