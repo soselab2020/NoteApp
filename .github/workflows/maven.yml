@@ -27,4 +27,3 @@ jobs:
       - name: 編譯與測試
         run: ./mvnw -B clean test package
 
-          path: target/*.jar
