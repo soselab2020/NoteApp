@@ -1,0 +1,37 @@
+name: CI (Sticky Notes - Maven)
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 取得程式碼
+        uses: actions/checkout@v4
+
+      - name: 設定 JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: 給 mvnw 執行權限
+        run: chmod +x ./mvnw
+
+      - name: 編譯與測試
+        run: ./mvnw -B clean test package
+
+      - name: 上傳 JAR 成品
+        uses: actions/upload-artifact@v4
+        with:
+          name: app-jar
+          path: target/*.jar
