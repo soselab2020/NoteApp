@@ -25,5 +25,5 @@ jobs:
           cache: maven
 
       - name: 編譯與測試
-        run: ./mvnw -B clean test package
+        run: mvn -B clean test package
 
